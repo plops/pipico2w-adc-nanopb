@@ -60,7 +60,7 @@ target_link_libraries(daq_app PRIVATE
     hardware_adc
     hardware_dma
     pico_cyw43_arch_lwip_threadsafe_background
-    protobuf-nanopb
+    protobuf-nanopb-static
 )
 
 # Enable USB output, disable UART
