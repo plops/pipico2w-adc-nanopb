@@ -49,6 +49,8 @@ target_compile_definitions(daq_app PRIVATE
 # Include directories
 target_include_directories(daq_app PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/nanopb
 )
 
 # Link hardware libraries, multicore, LWIP networking, and Nanopb
