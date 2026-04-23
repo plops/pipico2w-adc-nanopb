@@ -19,6 +19,9 @@ This project demonstrates how to transition from typical C-style embedded progra
 
 *   Raspberry Pi Pico 2W (RP2350 platform)
 
+> **Note on RP2040 (Pico W) Compatibility**: 
+> This code can also run perfectly fine on the older **Raspberry Pi Pico W** (RP2040 platform). To build for the Pico W, simply update the `CMakeLists.txt` and GitHub Actions workflow to use `-DPICO_PLATFORM=rp2040` and `-DPICO_BOARD=pico_w`.
+
 ## 🚀 Getting Started
 
 ### Prerequisites
