@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "nanopb.proto"; // Required for max_size options
+
+message Command {
+    bool request_snapshot = 1;     // Request a raw data batch
+    float set_clock_divisor = 2;   // 0 means keep current
+}
+
+message Telemetry {
+    float mean = 1;
+    float stddev = 2;
+    repeated uint32 histogram = 3[(nanopb).max_count = 16];
+    bytes snapshot = 4[(nanopb).max_size = 512]; // Small raw batch
+}

@@ -1,0 +1,52 @@
+name: Build Pico 2W DAQ Firmware
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Toolchain & Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            cmake ninja-build \
+            gcc-arm-none-eabi g++-arm-none-eabi \
+            libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib \
+            protobuf-compiler python3-protobuf
+
+      - name: Set up Pico SDK (v2.0.0 for RP2350)
+        run: |
+          git clone --recursive --branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git
+          echo "PICO_SDK_PATH=$GITHUB_WORKSPACE/pico-sdk" >> $GITHUB_ENV
+
+      - name: Configure CMake
+        run: |
+          mkdir build && cd build
+          cmake -G Ninja \
+            -DPICO_PLATFORM=rp2350 \
+            -DPICO_BOARD=pico2_w \
+            -DWIFI_SSID="${{ secrets.WIFI_SSID || 'DUMMY_SSID' }}" \
+            -DWIFI_PASS="${{ secrets.WIFI_PASS || 'DUMMY_PASS' }}" \
+            ..
+
+      - name: Build Firmware
+        run: |
+          cd build
+          ninja
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pico2w-firmware
+          path: build/*.uf2
