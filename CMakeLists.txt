@@ -25,6 +25,9 @@ endif()
 set(nanopb_BUILD_GENERATOR ON)
 add_subdirectory(nanopb)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/nanopb/extra)
+find_package(Nanopb REQUIRED)
+
 # Generate C++ files from the proto definition
 nanopb_generate_cpp(PROTO_SRCS PROTO_HDRS instrument.proto)
 

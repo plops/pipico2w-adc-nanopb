@@ -1,0 +1,32 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Pico / CMake specific
+*.uf2
+*.elf
+*.bin
+*.hex
+*.map
+*.dis
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.cmake
+
+# Python (if using any scripts)
+__pycache__/
+*.pyc
+venv/
+.env
+
+# OS specific
+.DS_Store
+Thumbs.db
