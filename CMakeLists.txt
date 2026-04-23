@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
 
+# Set the board BEFORE importing the SDK
+if (NOT DEFINED PICO_BOARD)
+    set(PICO_BOARD pico2_w)
+endif()
+
 # Include the Pico SDK import file
 include(pico_sdk_import.cmake)
 
@@ -17,7 +22,6 @@ if(NOT DEFINED WIFI_PASS)
 endif()
 
 # --- Nanopb Setup ---
-# nanopb_generate_cpp requires nanopb_BUILD_GENERATOR to be ON
 set(nanopb_BUILD_GENERATOR ON)
 add_subdirectory(nanopb)
 

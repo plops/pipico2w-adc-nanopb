@@ -27,9 +27,9 @@ jobs:
             libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib \
             protobuf-compiler python3-protobuf
 
-      - name: Set up Pico SDK (v2.0.0 for RP2350)
+      - name: Set up Pico SDK (Latest master for RP2350/Pico 2W support)
         run: |
-          git clone --recursive --branch 2.0.0 https://github.com/raspberrypi/pico-sdk.git
+          git clone --recursive https://github.com/raspberrypi/pico-sdk.git
           echo "PICO_SDK_PATH=$GITHUB_WORKSPACE/pico-sdk" >> $GITHUB_ENV
 
       - name: Configure CMake
